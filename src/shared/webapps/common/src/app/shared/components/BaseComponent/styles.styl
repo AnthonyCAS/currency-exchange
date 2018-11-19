@@ -1,0 +1,32 @@
+@import '../../settings'
+
+:host
+
+    .content
+        transition: All 0.3s ease
+        -webkit-transition: All 0.3s ease
+        -moz-transition: All 0.3s ease
+        -o-transition: All 0.3s ease
+        
+        &.hide
+            -webkit-filter: blur(2px)
+            -moz-filter: blur(2px)
+            -o-filter: blur(2px)
+            -ms-filter: blur(2px)
+            filter: blur(2px)
+
+    .loader-container
+        @extend .cover
+        
+        .bg
+            @extend .cover
+        
+        .loader-card
+            position: absolute
+            right: 20px
+            bottom: 20px
+            background: rgba(0, 0, 0, 0.8)
+            color: #FFF
+            font-size: 16px
+            font-family: Arial, Helvetica, sans-serif
+            padding: 15px 40px

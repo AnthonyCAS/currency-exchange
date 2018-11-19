@@ -1,0 +1,35 @@
+@import '../../settings'
+
+:host
+
+    .modal-container
+        @extend .cover
+        z-index: 1006
+
+    .bg
+        @extend .cover
+        background: rgba(0, 0, 0, 0.2)
+
+    .modal
+        position: absolute
+        left: calc( 50% - 300px )
+        top: calc( 50% - 250px )
+        width: 600px
+        height: 90%
+        background: #EEE
+        overflow: auto
+        font-family: Arial, Helvetica, sans-serif
+        z-index: 1006
+        
+        @media (max-width: 800px )
+            width: 300px;
+            margin-left: 146px;
+            margin-top: 10px;
+
+        .header
+            background: #00517b
+            color: #FFF
+            font-size: 15px
+            padding: 20px 0px
+            text-align: center
+            margin-bottom: 10px

@@ -1,0 +1,105 @@
+
+vars:
+    httpPort: 3000
+
+httpServers:
+    -   name: 'server'
+        ports:
+            http: '$httpPort'
+        routers:
+
+            -   name: 'webapps'
+                description: 'Web Applications Router'
+                path: '/'
+                routes:
+
+                    # Root handler
+                    -   method: 'GET'
+                        path: '/'
+                        pipeline:
+                            -   handler: '$getSessionHandler'
+                                params:
+                                    db: '$mongoDb'
+                                    model: '$core-db-models/Session'
+                            -   handler: '$rootHandler'
+
+                    # Currency Exchange
+                    -   method: 'GET'
+                        path: '/exchange'
+                        pipeline:
+                            -   handler: '$getSessionHandler'
+                                params:
+                                    db: '$mongoDb'
+                                    model: '$core-db-models/Session'
+                            -   handler: '$validateSessionExistsHandler'
+                            -   handler: '$redirectionHandler'
+                                params:
+                                    whenError: true
+                                    redirectUrl: '/access'
+                            -   staticsPath: '$exchange-webapp'
+
+                    # Access
+                    -   method: 'GET'
+                        path: '/access'
+                        pipeline:                            
+                            -   staticsPath: '$access-webapp'
+
+            -   name: 'auth'
+                description: 'Auth Router'
+                path: '/auth'
+                routes:
+
+                    # Register user
+                    -   method: 'POST'
+                        path: '/register-person-with-email-password'
+                        pipeline:
+                            -   handler: '$modelMongoTransactionHandler'
+                                params:
+                                    db: '$mongoDb'
+                                    model: '$core-db-models/User'
+                                    transaction: 'registerPersonWithEmailPassword'
+                                    transactionParams:
+                                        -  '&body.email'                                            
+                                        -  '&body.password'
+                            -   handler: '$setSessionCookieHandler'
+                                params:
+                                    db: '$mongoDb'
+                                    SessionModel: '$core-db-models/Session'
+                                skipWhenErrors: true
+                    
+                    # Login user
+                    -   method: 'POST'
+                        path: '/login-with-email-password'
+                        pipeline:
+                            -   handler: '$modelMongoTransactionHandler'
+                                params:
+                                    db: '$mongoDb'
+                                    model: '$core-db-models/User'
+                                    transaction: 'validateWithEmailPassword'
+                                    transactionParams:
+                                        - '&body.email'
+                                        - '&body.password'
+                            -   handler: '$setSessionCookieHandler'
+                                params:
+                                    db: '$mongoDb'
+                                    SessionModel: '$core-db-models/Session'
+                                skipWhenErrors: true                            
+
+            -   name: 'api'
+                description: 'API Router'
+                path: '/api'
+                routes:
+
+                    # Retrieve rates from the current currency
+                    -   method: 'GET'
+                        path: '/latest/:base/:symbols'
+                        pipeline:
+                            -   handler: '$modelMongoTransactionHandler'
+                                skipWhenErrors: true
+                                params:
+                                    db: '$mongoDb'
+                                    model: '$core-db-models/Currency'
+                                    transaction: 'getCurrencyRate'
+                                    transactionParams:
+                                        - '&params.base'
+                                        - '&params.symbols'

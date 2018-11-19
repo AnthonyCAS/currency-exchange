@@ -1,0 +1,43 @@
+{
+  "name": "n158-seed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run server",
+    "server": "npm run process -- src/processes/server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "process": "babel-node --presets es2015",
+    "postinstall": "npm run install-all && npm run build-all",
+    "build-webapp": "cd src/processes/server/webapps/$WEBAPP && npm run build",
+    "install-webapp": "cd src/processes/server/webapps/$WEBAPP && npm install",
+    "build-webapp:access": "WEBAPP=access npm run build-webapp",
+    "build-webapp:exchange": "WEBAPP=exchange npm run build-webapp",
+    "install-webapp:access": "WEBAPP=access npm run install-webapp",
+    "install-webapp:exchange": "WEBAPP=exchange npm run install-webapp",
+    "install-all": "npm run install-webapp:exchange && npm run install-webapp:access",
+    "build-all": "npm run build-webapp:exchange && npm run build-webapp:access"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "gulp": "^3.9.1",
+    "gulp-param": "^1.0.3",
+    "js-yaml": "^3.10.0",
+    "jsonschema": "^1.2.2",
+    "md5": "^2.2.1",
+    "mongodb": "^3.0.2",
+    "morgan": "^1.9.0",
+    "n158": "^1.1.2",
+    "q": "^1.5.1",
+    "run-sequence": "^2.2.1",
+    "sha256": "^0.2.0",
+    "underscore": "^1.8.3"
+  }
+}

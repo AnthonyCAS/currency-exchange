@@ -1,0 +1,102 @@
+
+// Variables
+sch-color1 = #0157b8
+font-family1 = Arial
+
+smartphoneWidth = 748px
+tabletWidth     = 1012px
+
+mqSmartphone = "only screen and (max-width: " + smartphoneWidth + ")"
+mqTablet     = "only screen and (max-width: " + tabletWidth     + ")"
+
+// Classes
+.cover
+    position: absolute
+    left: 0px
+    top: 0px
+    width: 100%
+    height: 100%
+
+.sch-modal-input 
+    background: #FFF
+    border: none
+    font-size: 16px
+    -webkit-border-radius: 3px
+    -moz-border-radius: 3px
+    border-radius: 3px
+    padding: 15px 20px
+    width: calc( 100% - 60px )
+    margin: 5px 10px
+
+.sch-modal-button 
+    border: none
+    padding: 15px 20px
+    width: calc( 100% - 20px )
+    margin: 5px 10px
+    background: #00517b
+    color: #EEE
+    font-size: 14px
+
+.sch-modal-info
+    background: #FFF
+    padding: 10px
+    margin: 15px
+
+    .key
+        font-size: 14px
+        color: #aaa
+
+    img
+        height: 70px
+
+    button
+        img
+            height: 15px
+
+    .value
+        font-size: 14px
+        color: #333
+
+.form-container
+    
+    p
+        margin: 7px 0px
+
+    label
+        color: #555
+        font-size: 13px
+        font-family: Arial, Helvetica, sans-serif
+
+    input, select
+        border: none
+        border-bottom: 1px solid #4799ce
+        width: 100%
+        padding: 10px
+        color: #000
+        font-size: 15px
+
+    button
+        border: none
+        width: 100%
+        padding: 15px 0px
+        color: #FFF
+        font-size: 15px
+        background: #4799ce
+
+    .input-container
+        margin-bottom: 20px
+
+    a
+        font-family: Arial, Helvetica, sans-serif
+        font-size: 13px
+        color: #4799ce
+        cursor: pointer
+        text-decoration: none
+
+// Setup
+button:focus {
+    outline: none
+}
+input:focus {
+    outline: none
+}

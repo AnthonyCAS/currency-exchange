@@ -1,0 +1,6 @@
+div(*ngIf="isOpen").modal-container
+    div((click)="hide()").bg
+    div.modal
+        div.header {{ title }}
+        div
+            ng-content

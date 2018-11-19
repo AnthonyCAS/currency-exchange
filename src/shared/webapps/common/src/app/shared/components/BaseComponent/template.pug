@@ -1,0 +1,11 @@
+div
+
+    div(*ngIf="!loggedIn")
+        div.loader-bg
+            img(src="shared-assets/icons/loader.gif").loader
+
+    //- Loader
+    div(*ngIf="isLoading").loader-container
+        div.bg
+        div.loader-card
+            span Cargando..
