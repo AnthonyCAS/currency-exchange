@@ -1,0 +1,32 @@
+div.cover
+
+    div.header-section
+        img(src="https://s3.amazonaws.com/enterprise-guide/logos/company/Belatrix-logo.png", alt="")
+
+    div.exchange-container
+        div.currency-box
+            span.currencyinput $           
+                input(
+                    name="usd",
+                    placeholder="USD",
+                    [(ngModel)]="currency.base",
+                    type="text",
+                    required,
+                    (ngModelChange)="onAmountChange($event)",
+                    myCurrencyFormatter
+                )
+
+            span.currencyinput €
+                input(
+                    name="eur",
+                    placeholder="EUR",
+                    [(ngModel)]="currency.target",
+                    type="text",
+                    disabled,
+                    myCurrencyFormatter
+                ).blocked
+
+        button((click)="computeRate()").compute-rate CALCULATE
+    
+    div(style="background: url(./assets/images/astral.jpg) no-repeat center center; background-size: cover").footer
+
