@@ -1,0 +1,17 @@
+h3 Register
+
+div
+
+    p
+        span Email
+        input(type="email", [(ngModel)]="user.email")
+    
+    p
+        span Password
+        input(type="password", [(ngModel)]="user.password")
+
+    p
+        button((click)="register()") Register
+    
+    p
+        a(uiSref="login") Already registered?
